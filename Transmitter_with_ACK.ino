@@ -1,5 +1,5 @@
 
-
+//testtest
 // SimpleTxAckPayload - the master or the transmitter
 
 #include <SPI.h>
@@ -35,13 +35,13 @@ int sink;
 
 Dirdata dirpack;
 
-long previousMillis = 0; 
+long previousMillis = 0;
 //===============
 
 void setup() {
-  
+
     Serial.begin(9600);
-    
+
     lcd.begin(20,4);
     lcd.setCursor(4,0);
   lcd.print("WAITING...");
@@ -85,7 +85,7 @@ void sdLog(){
   String dataString = "";
   SD.begin();
   myFile = SD.open("ROVLOG.txt", FILE_WRITE);
-  
+
 if(myFile){
   dataString = " Pressure ";
   dataString +=String(sensdata[0]);
@@ -109,12 +109,12 @@ void printScreen(){    //Function for Printing Sensor Data to LCD
   lcd.setCursor(4,0);
   lcd.print("ROV SENSORS");
 
-     
+
   lcd.setCursor(0,1);
   lcd.print("Temperature ");
   lcd.setCursor(13,1);
   lcd.print(sensdata[2]);
-  
+
   lcd.setCursor(0,2);
   lcd.print("Light ");
   lcd.setCursor(13,2);
@@ -124,7 +124,7 @@ void printScreen(){    //Function for Printing Sensor Data to LCD
   lcd.print("Pressure ");
   lcd.setCursor(13,3);
   lcd.print(sensdata[0]);
-  
+
 }
 
 
@@ -137,11 +137,11 @@ dirpack.sink=analogRead(A0);
 
 
 void getTelemetry(){
-  
+
       unsigned long currentMillis = millis();
     if(currentMillis - previousMillis > 10000) {
       previousMillis = currentMillis;
-    
+
     if(radio.isAckPayloadAvailable()){
       radio.read(&sensdata,sizeof(sensdata));
 //      Serial.print("received an Ack: ");
@@ -149,7 +149,6 @@ void getTelemetry(){
   printScreen();
   sdLog();
 
-     } 
+     }
     }
 }
-
