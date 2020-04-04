@@ -1,4 +1,4 @@
-
+//testtest
 
 // SimpleRxAckPayload- the slave or the receiver
 
@@ -52,7 +52,7 @@ for(int i=0;i<=3;i++){
     radio.openReadingPipe(1, thisSlaveAddress);
 
     radio.enableAckPayload();
-    
+
 
 
     radio.startListening();
@@ -82,11 +82,11 @@ void loop() {
 
 
 if (radio.available()){
-  radio.read(&directionpack,sizeof(Directions));   
+  radio.read(&directionpack,sizeof(Directions));
   radio.writeAckPayload(1,&sensdata,sizeof(sensdata));
   navigate();
 Serial.println(directionpack.dir);
- 
+
 }
 
 //navigate();
@@ -111,7 +111,7 @@ collectSensordata();
 }
 
 void navigate (){
-  
+
   //DOWN
   if (directionpack.dir<100 && directionpack.dir>0){
     digitalWrite(2,HIGH);
@@ -120,22 +120,22 @@ void navigate (){
     digitalWrite(5,LOW);
 
     analogWrite(6,directionpack.knob);
-    
+
     if(directionpack.sink>100 && directionpack.sink<400){
     digitalWrite(A4,LOW);
     digitalWrite(A5,HIGH);
     }
-    
+
     else if(directionpack.sink<100){
     digitalWrite(A4,HIGH);
     digitalWrite(A5,LOW);
-      
+
     }
     else{
     digitalWrite(A4,LOW);
     digitalWrite(A5,LOW);
     }
-    
+
   }
 
   //UP
@@ -146,7 +146,7 @@ void navigate (){
     digitalWrite(5,HIGH);
 
     analogWrite(6,directionpack.knob);
-    
+
     if(directionpack.sink>100 && directionpack.sink<400){
     digitalWrite(A4,LOW);
     digitalWrite(A5,HIGH);
@@ -154,12 +154,12 @@ void navigate (){
     else if(directionpack.sink<100){
     digitalWrite(A4,HIGH);
     digitalWrite(A5,LOW);
-      
+
     }
     else{
     digitalWrite(A4,LOW);
     digitalWrite(A5,LOW);
-      
+
     }
   }
 
@@ -171,7 +171,7 @@ void navigate (){
     digitalWrite(5,LOW);
 
     analogWrite(6,directionpack.knob);
-    
+
     if(directionpack.sink>100 && directionpack.sink<400){
     digitalWrite(A4,LOW);
     digitalWrite(A5,HIGH);
@@ -179,12 +179,12 @@ void navigate (){
     else if(directionpack.sink<100){
     digitalWrite(A4,HIGH);
     digitalWrite(A5,LOW);
-      
+
     }
     else{
     digitalWrite(A4,LOW);
     digitalWrite(A5,LOW);
-      
+
     }
   }
 
@@ -203,22 +203,22 @@ void navigate (){
     else if(directionpack.sink<100){
     digitalWrite(A4,HIGH);
     digitalWrite(A5,LOW);
-      
+
     }
     else{
     digitalWrite(A4,LOW);
     digitalWrite(A5,LOW);
-      
+
     }
   }
-  
+
   else{
     digitalWrite(2,LOW);
     digitalWrite(3,LOW);
     digitalWrite(4,LOW);
     digitalWrite(5,LOW);
     analogWrite(6,directionpack.knob);
-    
+
     if(directionpack.sink>100 && directionpack.sink<400){
     digitalWrite(A4,LOW);
     digitalWrite(A5,HIGH);
@@ -226,31 +226,31 @@ void navigate (){
     else if(directionpack.sink<100){
     digitalWrite(A4,HIGH);
     digitalWrite(A5,LOW);
-      
+
     }
     else{
     digitalWrite(A4,LOW);
     digitalWrite(A5,LOW);
-      
+
     }
   }
 }
 
 
 void collectSensordata(){  //Function for Sensor Data
-  
+
   // PRESURE_SENSOR
   // read the input on analog pin 1:
   int sensorValue = analogRead(A1);
   // Convert the analog reading (which goes from 0 - 1023) to a voltage (0 - 5V):
   float voltage = sensorValue * (5.0 / 1023.0);
   sensdata[0] = (voltage+0.475)/(0.045);
-  
+
 
 //  LDR_SENSOR
   sensdata[1] = analogRead(ldrPin);
 
-  
+
 //TEMP_SENSOR
   Vo = analogRead(ThermistorPin);
   R2 = R1 * (1023.0 / (float)Vo - 1.0);
@@ -258,4 +258,3 @@ void collectSensordata(){  //Function for Sensor Data
   T = (1.0 / (c1 + c2*logR2 + c3*logR2*logR2*logR2));
   sensdata[2] = T - 273.15;
 }
-
