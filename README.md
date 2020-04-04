@@ -1,10 +1,16 @@
-## Axolotl Remote Operation Vehicle(ROV)
+# Axolotl Remote Operation Vehicle(ROV)
+
+PHOTO
 
 This repo tracks the built progress of the Axolotl ROV.
 
 Axolotl is a wirelessly controlled ROV concept, designed and built as a dissertation project for ELMEPA.
 
-# Key Features
+## Key Features
 * Feature
 * Feature
 * etc.
+
+## Repo Structure
+* ------
+* ------
