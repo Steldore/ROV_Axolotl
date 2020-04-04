@@ -1,5 +1,3 @@
-
-//testtest
 // SimpleTxAckPayload - the master or the transmitter
 
 #include <SPI.h>
